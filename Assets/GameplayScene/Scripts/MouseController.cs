@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Unity.Netcode;
+using Unity.Netcode;
 
-public class MouseController : MonoBehaviour//NetworkBehaviour
+public class MouseController : NetworkBehaviour
 {
     public static float mouse_sensitivity = 500f;
     [SerializeField] private Transform playerBody;
@@ -16,12 +16,11 @@ public class MouseController : MonoBehaviour//NetworkBehaviour
     void Start()
     {
         //for multiplayer
-        /*
         if (!IsOwner)
         {
-            player_camera.SetActive(false);
+            cameraView.gameObject.SetActive(false);
         }
-        */
+        
         x_rotation = cameraView.localEulerAngles.x;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -29,7 +28,7 @@ public class MouseController : MonoBehaviour//NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
 
         //if (!PauseTransition.isPaused)
         //{

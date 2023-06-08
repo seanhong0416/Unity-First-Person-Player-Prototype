@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Unity.Netcode;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour//NetworkBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform groundCheck;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour//NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!IsOwner) return;
+        if (!IsOwner) return;
 
         //For in-game pause design
         //if (!PauseTransition.isPaused)
