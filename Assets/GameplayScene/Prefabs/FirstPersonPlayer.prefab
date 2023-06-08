@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 2942347379336097976}
   - component: {fileID: 1024901800070911107}
   - component: {fileID: 5731183997382844159}
+  - component: {fileID: -4871647776032858304}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -185,6 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaef3b9ec7332b240af1b6f9df5a174d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBody: {fileID: 2942347379336097979}
+  cameraView: {fileID: 2942347378969399157}
 --- !u!114 &5731183997382844159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,15 +200,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562edcd204f62f54c8d6563358df313a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
-  groundCheck: {fileID: 0}
+  characterController: {fileID: 2942347379336097976}
+  groundCheck: {fileID: 2942347379727043774}
   movement_speed: 12
   gravity: 9.8
   jumping_velocity: 6
   ground_check_radius: 0.4
   ground_mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
+--- !u!114 &-4871647776032858304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942347379336097974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &2942347379727043775
 GameObject:
   m_ObjectHideFlags: 0

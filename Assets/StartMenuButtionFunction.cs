@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class StartMenuButtionFunction : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void StartGameButtonFunction()
     {
-        
+        NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void JoinGameButtonFunction()
     {
-        
+
     }
 }
