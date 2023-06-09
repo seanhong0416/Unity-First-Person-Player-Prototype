@@ -36,6 +36,7 @@ public class PlayerMovement : NetworkBehaviour
         float movement_y = Input.GetAxis("Horizontal");
         Vector3 final_movement = transform.right * movement_y + transform.forward * movement_x;
         characterController.Move(movement_speed * final_movement * Time.deltaTime);
+        //Debug.Log(movement_speed * final_movement * Time.deltaTime);
 
         //for jumping
         if (on_ground && Input.GetButtonDown("Jump"))
