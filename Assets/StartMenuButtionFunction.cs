@@ -15,6 +15,5 @@ public class StartMenuButtionFunction : MonoBehaviour
     public void JoinGameButtonFunction()
     {
         NetworkManager.Singleton.StartClient();
-        NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
     }
 }
