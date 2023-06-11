@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class StartMenuButtionFunction : MonoBehaviour
 {
+    [SerializeField] GameObject joinGameMenu;
     public void StartGameButtonFunction()
     {
         NetworkManager.Singleton.StartHost();
@@ -14,6 +15,7 @@ public class StartMenuButtionFunction : MonoBehaviour
 
     public void JoinGameButtonFunction()
     {
-        NetworkManager.Singleton.StartClient();
+        joinGameMenu.SetActive(true);
+        gameObject.SetActive(false);
     }
 }
