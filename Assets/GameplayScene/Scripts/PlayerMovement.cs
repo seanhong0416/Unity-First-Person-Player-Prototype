@@ -7,6 +7,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] Animator animator;
 
     public float movement_speed = 12f;
     public float gravity = 9.8f;
@@ -36,6 +37,38 @@ public class PlayerMovement : NetworkBehaviour
         float movement_y = Input.GetAxis("Horizontal");
         Vector3 final_movement = transform.right * movement_y + transform.forward * movement_x;
         characterController.Move(movement_speed * final_movement * Time.deltaTime);
+        if(final_movement != Vector3.zero)
+        {
+            if(Mathf.Abs(movement_x) > Mathf.Abs(movement_y))
+            {
+                if(movement_x > 0)
+                {
+                    animator.SetBool("is_moving_forward", true);
+                }
+                else
+                {
+                    animator.SetBool("is_moving_back", true);
+                }
+            }
+            else
+            {
+                if(movement_y > 0)
+                {
+                    animator.SetBool("is_moving_right", true);
+                }
+                else
+                {
+                    animator.SetBool("is_moving_left", true);
+                }
+            }
+        }
+        else
+        {
+            animator.SetBool("is_moving_forward", false);
+            animator.SetBool("is_moving_back", false);
+            animator.SetBool("is_moving_right", false);
+            animator.SetBool("is_moving_left", false);
+        }
         //Debug.Log(movement_speed * final_movement * Time.deltaTime);
 
         //for jumping
