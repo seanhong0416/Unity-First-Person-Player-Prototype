@@ -73,6 +73,7 @@ public class BlastShoot : NetworkBehaviour
             for (int i = 0; i < pellets_per_shot; i++)
             {
                 razerInstance[i].GetComponent<VolumetricLineBehavior>().LineWidth = 0f;
+                SyncRazerServerRpc(razerInstance[i].GetComponent<NetworkObject>().NetworkObjectId, false);
             }
         }
     }
@@ -84,6 +85,9 @@ public class BlastShoot : NetworkBehaviour
         //Activate razer
         //razerInstance.GetComponent<LineRenderer>().positionCount = 2;
         SetRazer(true);
+        Vector3 razer_start;
+        Vector3 razer_end;
+
         for (int i = 0; i < pellets_per_shot; i++)
         {
             Vector3 offset = Random.Range(-spread_range, spread_range) * cameraTransform.right + Random.Range(-spread_range, spread_range) * cameraTransform.up;
@@ -96,8 +100,8 @@ public class BlastShoot : NetworkBehaviour
                 {
                     HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
                 }
-                Vector3 razer_start = transform.position;
-                Vector3 razer_end = hit.point;
+                razer_start = transform.position;
+                razer_end = hit.point;
                 razerInstance[i].GetComponent<VolumetricLineBehavior>().StartPos = razer_start;
                 razerInstance[i].GetComponent<VolumetricLineBehavior>().EndPos = razer_end;
                 //razerInstance.GetComponent<LineRenderer>().SetPosition(0, razer_start);
@@ -105,13 +109,15 @@ public class BlastShoot : NetworkBehaviour
             }
             else
             {
-                Vector3 razer_start = transform.position;
-                Vector3 razer_end = razer_start + final_direction * max_distance;
+                razer_start = transform.position;
+                razer_end = razer_start + final_direction * max_distance;
                 razerInstance[i].GetComponent<VolumetricLineBehavior>().StartPos = razer_start;
                 razerInstance[i].GetComponent<VolumetricLineBehavior>().EndPos = razer_end;
                 //razerInstance.GetComponent<LineRenderer>().SetPosition(0, razer_start);
                 //razerInstance.GetComponent<LineRenderer>().SetPosition(1, razer_end);
             }
+
+            SyncRazerServerRpc(razerInstance[i].GetComponent<NetworkObject>().NetworkObjectId, true, razer_start, razer_end);
         }
     }
 
@@ -139,5 +145,35 @@ public class BlastShoot : NetworkBehaviour
     void HitBallServerRpc(string ObjectName, Vector3 normal)
     {
         GameObject.Find(ObjectName).GetComponent<Rigidbody>().AddForce(-normal * impact_force);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    void SyncRazerServerRpc(ulong networkObjectId, bool state, Vector3 start_pos = default(Vector3), Vector3 end_pos = default(Vector3), ServerRpcParams serverRpcParams = default)
+    {
+        var clientId = serverRpcParams.Receive.SenderClientId;
+        if (state)
+            SetRazerClientRpc(start_pos, end_pos, networkObjectId, clientId);
+        else
+            ResetRazerClientRpc(networkObjectId, clientId);
+    }
+
+    [ClientRpc]
+    void SetRazerClientRpc(Vector3 start_pos, Vector3 end_pos, ulong networkObjectId, ulong clientId)
+    {
+        if (NetworkManager.Singleton.LocalClientId == clientId) return;
+
+        var razer = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject.GetComponent<VolumetricLineBehavior>();
+        razer.LineWidth = 1f;
+        razer.StartPos = start_pos;
+        razer.EndPos = end_pos;
+    }
+
+    [ClientRpc]
+    void ResetRazerClientRpc(ulong networkObjectId, ulong clientId)
+    {
+        if (NetworkManager.Singleton.LocalClientId == clientId) return;
+
+        var razer = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject.GetComponent<VolumetricLineBehavior>();
+        razer.LineWidth = 0f;
     }
 }
