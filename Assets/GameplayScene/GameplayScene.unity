@@ -3602,7 +3602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510518d3870548b49ba1c367166fdd34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wall_impact_force: 30
+  wall_impact_force: 150
 --- !u!1001 &1813197791
 PrefabInstance:
   m_ObjectHideFlags: 0
