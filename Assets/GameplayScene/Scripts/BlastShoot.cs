@@ -9,7 +9,7 @@ public class BlastShoot : NetworkBehaviour
 {
     [SerializeField] float max_distance = 15f;
     [SerializeField] float fire_range = 15f;
-    [SerializeField] float impact_force = 15f;
+    [SerializeField] public float impact_force = 15f;
     [SerializeField] float fire_rate = 1f;
     [SerializeField] float shotgun_razer_delay = 1f;
     [SerializeField] float spread_range = 1;

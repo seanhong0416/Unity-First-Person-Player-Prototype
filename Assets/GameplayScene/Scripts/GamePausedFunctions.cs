@@ -11,7 +11,12 @@ public class GamePausedFunctions : NetworkBehaviour
 
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject settingMenu;
+
     [SerializeField] TMP_InputField mouseSensitivityInput;
+    [SerializeField] TMP_InputField jumpForceInput;
+    [SerializeField] TMP_InputField playerGravityInput;
+    [SerializeField] TMP_InputField blastForceInput;
+
     [SerializeField] TMP_Text applyResult;
     GameObject scoreboard;
 
@@ -20,6 +25,11 @@ public class GamePausedFunctions : NetworkBehaviour
     {
         scoreboard = GameObject.Find("Scoreboard");
         Debug.Log("scoreboard = " + scoreboard);
+
+        mouseSensitivityInput.text = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<MouseController>().mouse_sensitivity.ToString();
+        jumpForceInput.text = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerMovement>().jumping_velocity.ToString();
+        playerGravityInput.text = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerMovement>().gravity.ToString();
+        blastForceInput.text = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<BlastShoot>().impact_force.ToString();
     }
 
     // Update is called once per frame
@@ -94,6 +104,9 @@ public class GamePausedFunctions : NetworkBehaviour
         try
         {
             NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<MouseController>().mouse_sensitivity = float.Parse(mouseSensitivityInput.text);
+            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerMovement>().jumping_velocity = float.Parse(jumpForceInput.text);
+            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerMovement>().gravity = float.Parse(playerGravityInput.text);
+            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<BlastShoot>().impact_force = float.Parse(blastForceInput.text);
             applyResult.SetText("Success");
             applyResult.color = Color.green;
         }
