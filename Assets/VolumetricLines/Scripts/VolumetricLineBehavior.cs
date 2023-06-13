@@ -299,7 +299,7 @@ namespace VolumetricLines
 			if (null != m_meshFilter)
 			{
 				var mesh = m_meshFilter.sharedMesh;
-				//Debug.Assert(null != mesh);
+				Debug.Assert(null != mesh);
 				if (null != mesh)
 				{
 					mesh.bounds = CalculateBounds();
@@ -340,7 +340,7 @@ namespace VolumetricLines
 			if (null != m_meshFilter)
 			{
 				var mesh = m_meshFilter.sharedMesh;
-				//Debug.Assert(null != mesh);
+				Debug.Assert(null != mesh);
 				if (null != mesh)
 				{
 					mesh.vertices = vertexPositions;

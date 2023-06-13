@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 4950064287501732548}
   - component: {fileID: 8491197086493459641}
   - component: {fileID: 8067689306771919141}
+  - component: {fileID: 4285834875346510248}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -284,6 +285,26 @@ MonoBehaviour:
   max_distance: 15
   line_width: 1
   razerPrefab: {fileID: 122648, guid: c754ab451e881b641a68e3c9de754e8b, type: 3}
+--- !u!114 &4285834875346510248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942347379336097974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31a55106f54bbd49aeac4f68e0a7353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max_distance: 15
+  fire_range: 15
+  impact_force: 15
+  fire_rate: 1
+  shotgun_razer_delay: 1
+  spread_range: 1
+  pellets_per_shot: 6
+  razerPrefab: {fileID: 122648, guid: 75423a7f102e6f441bd52473c3ecbd22, type: 3}
 --- !u!1 &2942347379727043775
 GameObject:
   m_ObjectHideFlags: 0

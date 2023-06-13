@@ -50,6 +50,7 @@ public class Shoot : NetworkBehaviour
             next_fire_time = Time.time + 1 / fire_rate;
         }
         else if(Input.GetButtonUp("Fire1")){
+            //reset razer
             razerInstance.GetComponent<VolumetricLineBehavior>().LineWidth = 0f;
             //razerInstance.GetComponent<LineRenderer>().positionCount = 0;
         }
@@ -59,6 +60,8 @@ public class Shoot : NetworkBehaviour
     void fire()
     {
         RaycastHit hit;
+
+        //Activate razer
         //razerInstance.GetComponent<LineRenderer>().positionCount = 2;
         razerInstance.GetComponent<VolumetricLineBehavior>().LineWidth = 1f;
 
