@@ -19,6 +19,7 @@ public class GamePausedFunctions : NetworkBehaviour
     void Start()
     {
         scoreboard = GameObject.Find("Scoreboard");
+        Debug.Log("scoreboard = " + scoreboard);
     }
 
     // Update is called once per frame
@@ -61,12 +62,14 @@ public class GamePausedFunctions : NetworkBehaviour
 
     public void ResetScoreButtonFunction()
     {
+        Debug.Log("at start of ResetScoreButtonFunction");
         ResetScoreServerRpc(scoreboard.GetComponent<NetworkObject>().NetworkObjectId);
     }
 
     [ServerRpc(RequireOwnership = false)]
     void ResetScoreServerRpc(ulong networkObjectId)
     {
+        Debug.Log("at start of reset score server rpc");
         var teamScoreManager = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject.GetComponent<TeamScoreManagement>();
         teamScoreManager.team_chisato_score.Value = 0;
         teamScoreManager.team_takina_score.Value = 0;
