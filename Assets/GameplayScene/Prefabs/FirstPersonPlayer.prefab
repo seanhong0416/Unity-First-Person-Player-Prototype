@@ -207,9 +207,9 @@ MonoBehaviour:
   characterController: {fileID: 2942347379336097976}
   groundCheck: {fileID: 2942347379727043774}
   animator: {fileID: 4430457426242806216}
-  movement_speed: 3
-  gravity: 9.8
-  jumping_velocity: 6
+  movement_speed: 12
+  gravity: 19.6
+  jumping_velocity: 12
   ground_check_radius: 0.4
   ground_mask:
     serializedVersion: 2
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impact_force: 15
   fire_rate: 15
-  max_distance: 15
+  max_distance: 60
   line_width: 1
   razerPrefab: {fileID: 122648, guid: c754ab451e881b641a68e3c9de754e8b, type: 3}
 --- !u!114 &4285834875346510248
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31a55106f54bbd49aeac4f68e0a7353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_distance: 15
+  max_distance: 30
   fire_range: 15
   impact_force: 15
   fire_rate: 1

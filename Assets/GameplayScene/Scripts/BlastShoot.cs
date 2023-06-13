@@ -94,7 +94,7 @@ public class BlastShoot : NetworkBehaviour
                 Debug.Log(hit.transform.name);
                 if (hit.rigidbody != null)
                 {
-                    //HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
+                    HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
                 }
                 Vector3 razer_start = transform.position;
                 Vector3 razer_end = hit.point;
@@ -133,5 +133,11 @@ public class BlastShoot : NetworkBehaviour
     {
         if (NetworkManager.Singleton.LocalClientId != clientId) return;
         razerInstance[pelletNumber] = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject;
+    }
+
+    [ServerRpc(RequireOwnership =false)]
+    void HitBallServerRpc(string ObjectName, Vector3 normal)
+    {
+        GameObject.Find(ObjectName).GetComponent<Rigidbody>().AddForce(-normal * impact_force);
     }
 }

@@ -80,12 +80,12 @@ public class Shoot : NetworkBehaviour
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, max_distance))
         {
             Debug.Log(hit.transform.name);
-            SetScoreServerRpc(scoreboard.GetComponent<NetworkObject>().NetworkObjectId);
-            Debug.Log(scoreboard.GetComponent<TestNetworkVariable>().test_number.Value);
+            //SetScoreServerRpc(scoreboard.GetComponent<NetworkObject>().NetworkObjectId);
+            //Debug.Log(scoreboard.GetComponent<TestNetworkVariable>().test_number.Value);
 
             if (hit.rigidbody != null)
             {
-                //HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
+                HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
             }
             Vector3 razer_start = transform.position;
             Vector3 razer_end = hit.point;
@@ -122,9 +122,18 @@ public class Shoot : NetworkBehaviour
         razerInstance = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject;
     }
 
+    [ServerRpc(RequireOwnership = false)]
+    void HitBallServerRpc(string ObjectName, Vector3 normal)
+    {
+        GameObject.Find(ObjectName).GetComponent<Rigidbody>().AddForce(-normal * impact_force);
+    }
+
+    /*
+    //for testing network variable
     [ServerRpc(RequireOwnership =false)]
     void SetScoreServerRpc(ulong networkObjectId)
     {
         NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject.GetComponent<TestNetworkVariable>().test_number.Value += 1;
     }
+    */
 }
