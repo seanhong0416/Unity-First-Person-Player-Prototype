@@ -26,6 +26,7 @@ public class BlastShoot : NetworkBehaviour
     {
         if (!IsOwner) return;
         cameraTransform = transform.GetChild(0);
+        razerInstance = new GameObject[pellets_per_shot];
     }
 
     // Update is called once per frame
@@ -123,6 +124,14 @@ public class BlastShoot : NetworkBehaviour
         {
             razerInstance[i] = Instantiate(razerPrefab);
             razerInstance[i].GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+            AssignSpawnedRazerClientRpc(clientId, razerInstance[i].GetComponent<NetworkObject>().NetworkObjectId, i);
         }
+    }
+
+    [ClientRpc]
+    void AssignSpawnedRazerClientRpc(ulong clientId, ulong networkObjectId, int pelletNumber)
+    {
+        if (NetworkManager.Singleton.LocalClientId != clientId) return;
+        razerInstance[pelletNumber] = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject;
     }
 }

@@ -12,8 +12,9 @@ public class Shoot : NetworkBehaviour
     [SerializeField] float max_distance = 15f;
     [SerializeField] float line_width = 1f;
     float next_fire_time;
-    bool razer_Instantiated = false;
+    bool scene_object_initiated = false;
 
+    GameObject scoreboard;
     [SerializeField] GameObject razerPrefab;
     GameObject razerInstance;
     Transform cameraTransform;
@@ -32,13 +33,24 @@ public class Shoot : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        if (!razer_Instantiated)
+        if (!scene_object_initiated)
         {
             if(SceneManager.GetActiveScene().name == "GameplayScene")
             {
                 Debug.Log("spawning razer line");
                 SpawnRazerServerRpc();
-                razer_Instantiated = true;
+                Debug.Log("after razer spawn server rpc : " + razerInstance);
+                scene_object_initiated = true;
+
+                Debug.Log("setting scoreboard");
+                if(!(scoreboard = GameObject.Find("Scoreboard")))
+                {
+                    Debug.Log("can't find scoreboard object");
+                }
+                else
+                {
+                    Debug.Log("scoreboard set successfully");
+                }
             }
         }
 
@@ -68,6 +80,9 @@ public class Shoot : NetworkBehaviour
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, max_distance))
         {
             Debug.Log(hit.transform.name);
+            SetScoreServerRpc(scoreboard.GetComponent<NetworkObject>().NetworkObjectId);
+            Debug.Log(scoreboard.GetComponent<TestNetworkVariable>().test_number.Value);
+
             if (hit.rigidbody != null)
             {
                 //HitBallServerRpc(hit.collider.gameObject.name, hit.normal);
@@ -96,5 +111,20 @@ public class Shoot : NetworkBehaviour
         var clientId = serverRpcParams.Receive.SenderClientId;
         razerInstance = Instantiate(razerPrefab);
         razerInstance.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        AssignSpawnedRazerClientRpc(clientId, razerInstance.GetComponent<NetworkObject>().NetworkObjectId);
+        Debug.Log("In razer spawn server rpc : " + razerInstance);
+    }
+
+    [ClientRpc]
+    void AssignSpawnedRazerClientRpc(ulong clientId, ulong networkObjectId)
+    {
+        if (NetworkManager.Singleton.LocalClientId != clientId) return;
+        razerInstance = NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject;
+    }
+
+    [ServerRpc(RequireOwnership =false)]
+    void SetScoreServerRpc(ulong networkObjectId)
+    {
+        NetworkManager.Singleton.SpawnManager.SpawnedObjects[networkObjectId].gameObject.GetComponent<TestNetworkVariable>().test_number.Value += 1;
     }
 }
