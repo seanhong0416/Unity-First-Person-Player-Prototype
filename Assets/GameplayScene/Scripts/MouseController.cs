@@ -5,7 +5,7 @@ using Unity.Netcode;
 
 public class MouseController : NetworkBehaviour
 {
-    public static float mouse_sensitivity = 500f;
+    public float mouse_sensitivity = 500f;
     [SerializeField] private Transform playerBody;
     [SerializeField] private Transform cameraView;
     //public GameObject player_camera;
