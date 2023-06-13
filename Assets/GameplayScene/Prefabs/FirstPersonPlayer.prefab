@@ -279,10 +279,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98f73a847fbe924285fe91823bda2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fire_range: 15
   impact_force: 15
   fire_rate: 15
-  razerPrefab: {fileID: 122648, guid: c754ab451e881b641a68e3c9de754e8b, type: 3}
+  max_distance: 15
+  line_width: 1
+  razerPrefab: {fileID: 1380234345082009323, guid: aef2db3969eaf60419bb928b4df33dc5,
+    type: 3}
 --- !u!1 &2942347379727043775
 GameObject:
   m_ObjectHideFlags: 0
