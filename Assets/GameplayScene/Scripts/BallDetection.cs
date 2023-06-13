@@ -47,7 +47,7 @@ public class BallDetection : MonoBehaviour
             ball.useGravity = false;
             ball.velocity = Vector3.zero;
             //add score
-            if (collision.gameObject.name == "TeamChisatoFloor")
+            if (collision.gameObject.name == "TeamTakinaFloor")
             {
                 //Scoring.ScoreOrangeCats.Value += 1;
                 scoreboard.GetComponent<TeamScoreManagement>().team_chisato_score.Value += 1;

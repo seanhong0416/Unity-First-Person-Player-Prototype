@@ -50,14 +50,12 @@ public class GamePausedFunctions : NetworkBehaviour
 
     public void TeleportTeamChisatoButtonFunction()
     {
-        var clientId = NetworkManager.Singleton.LocalClientId;
-        NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerSpawnpoint>().TeleportTeamChisato();
+        NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSpawnpoint>().TeleportTeamChisato();
     }
 
     public void TeleportTeamTakinaButtonFunction()
     {
-        var clientId = NetworkManager.Singleton.LocalClientId;
-        NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<PlayerSpawnpoint>().TeleportTeamTakina();
+        NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<PlayerSpawnpoint>().TeleportTeamTakina();
     }
 
     public void ResetScoreButtonFunction()
@@ -93,12 +91,9 @@ public class GamePausedFunctions : NetworkBehaviour
 
     public void ApplyButtonFunction()
     {
-        var localClientId = NetworkManager.Singleton.LocalClientId;
-        var localPlayerObject = NetworkManager.Singleton.ConnectedClients[localClientId].PlayerObject;
-
         try
         {
-            localPlayerObject.GetComponent<MouseController>().mouse_sensitivity = float.Parse(mouseSensitivityInput.text);
+            NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<MouseController>().mouse_sensitivity = float.Parse(mouseSensitivityInput.text);
             applyResult.SetText("Success");
             applyResult.color = Color.green;
         }
