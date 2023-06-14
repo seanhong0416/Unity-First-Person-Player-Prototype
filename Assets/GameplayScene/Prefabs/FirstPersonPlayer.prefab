@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8491197086493459641}
   - component: {fileID: 8067689306771919141}
   - component: {fileID: 4285834875346510248}
+  - component: {fileID: 4596330620883274104}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -306,6 +307,19 @@ MonoBehaviour:
   spread_range: 1
   pellets_per_shot: 6
   razerPrefab: {fileID: 122648, guid: 75423a7f102e6f441bd52473c3ecbd22, type: 3}
+--- !u!114 &4596330620883274104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942347379336097974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c999605bb1c4a4a98f53ef25ea0454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player_invisible: 1
 --- !u!1 &2942347379727043775
 GameObject:
   m_ObjectHideFlags: 0

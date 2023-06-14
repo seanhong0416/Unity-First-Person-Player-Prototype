@@ -44,20 +44,32 @@ public class PlayerMovement : NetworkBehaviour
                 if(movement_x > 0)
                 {
                     animator.SetBool("is_moving_forward", true);
+                    animator.SetBool("is_moving_back", false);
+                    animator.SetBool("is_moving_right", false);
+                    animator.SetBool("is_moving_left", false);
                 }
                 else
                 {
+                    animator.SetBool("is_moving_forward", false);
                     animator.SetBool("is_moving_back", true);
+                    animator.SetBool("is_moving_right", false);
+                    animator.SetBool("is_moving_left", false);
                 }
             }
             else
             {
                 if(movement_y > 0)
                 {
+                    animator.SetBool("is_moving_forward", false);
+                    animator.SetBool("is_moving_back", false);
                     animator.SetBool("is_moving_right", true);
+                    animator.SetBool("is_moving_left", false);
                 }
                 else
                 {
+                    animator.SetBool("is_moving_forward", false);
+                    animator.SetBool("is_moving_back", false);
+                    animator.SetBool("is_moving_right", false);
                     animator.SetBool("is_moving_left", true);
                 }
             }
