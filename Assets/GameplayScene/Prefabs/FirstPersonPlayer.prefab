@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 8067689306771919141}
   - component: {fileID: 4285834875346510248}
   - component: {fileID: 4596330620883274104}
+  - component: {fileID: 3159912880106320147}
   m_Layer: 0
   m_Name: FirstPersonPlayer
   m_TagString: Untagged
@@ -286,6 +287,7 @@ MonoBehaviour:
   fire_rate: 15
   max_distance: 60
   line_width: 1
+  stop_shooting: 0
   razerPrefab: {fileID: 122648, guid: c754ab451e881b641a68e3c9de754e8b, type: 3}
 --- !u!114 &4285834875346510248
 MonoBehaviour:
@@ -319,7 +321,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c999605bb1c4a4a98f53ef25ea0454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_invisible: 1
+  player_invisible: 0
+--- !u!114 &3159912880106320147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942347379336097974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f78764c30deaf5c4e89bc00cd0e5f9ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  windWallPrefab: {fileID: 3239336205102978376, guid: 5ac95b6a19688fb4b99d0d9efc793b69,
+    type: 3}
+  lineStripPrefab: {fileID: 9105192178220155194, guid: 062dc303ffc70d84ebe2b4db9d465627,
+    type: 3}
+  cameraTransform: {fileID: 2942347378969399157}
 --- !u!1 &2942347379727043775
 GameObject:
   m_ObjectHideFlags: 0

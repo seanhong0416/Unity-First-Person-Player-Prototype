@@ -11,6 +11,7 @@ public class Shoot : NetworkBehaviour
     [SerializeField] float fire_rate = 15f;
     [SerializeField] float max_distance = 15f;
     [SerializeField] float line_width = 1f;
+    public bool stop_shooting = false;
     float next_fire_time;
     bool scene_object_initiated = false;
 
@@ -67,7 +68,7 @@ public class Shoot : NetworkBehaviour
 
         //Debug.Log("at the start of update function" + razerInstance);
 
-        if (Input.GetButton("Fire1") && Time.time >= next_fire_time)
+        if (Input.GetButton("Fire1") && Time.time >= next_fire_time && !stop_shooting)
         {
             fire();
             next_fire_time = Time.time + 1 / fire_rate;

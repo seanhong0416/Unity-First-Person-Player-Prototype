@@ -37,7 +37,7 @@ public class BallDetection : MonoBehaviour
         //ball hit wall, bounce back harder
         if (collision.gameObject.layer == layer_of_wall)
         {
-            ball.AddForce(collision.contacts[0].normal * wall_impact_force);
+            ball.AddForce(collision.GetContact(0).normal * wall_impact_force);
             Debug.Log("wall hit");
         }
         //ball touch ground => reset ball and add score
